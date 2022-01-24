@@ -1,0 +1,149 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf400
+{\fonttbl\f0\fmodern\fcharset0 Courier-Oblique;\f1\fmodern\fcharset0 Courier;\f2\fmodern\fcharset0 Courier-Bold;
+}
+{\colortbl;\red255\green255\blue255;\red51\green110\blue109;\red242\green242\blue242;\red38\green38\blue38;
+\red15\green112\blue1;\red83\green83\blue83;\red169\green14\blue26;\red19\green8\blue105;\red171\green79\blue117;
+}
+{\*\expandedcolortbl;;\cssrgb\c25098\c50196\c50196;\cssrgb\c96078\c96078\c96078;\cssrgb\c20000\c20000\c20000;
+\cssrgb\c0\c50196\c0;\cssrgb\c40000\c40000\c40000;\cssrgb\c72941\c12941\c12941;\cssrgb\c9804\c9020\c48627;\cssrgb\c73333\c40000\c53333;
+}
+{\info
+{\author zero_kelvin}}\paperw11900\paperh16840\margl1440\margr1440\vieww20640\viewh12600\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\i\fs26 \cf2 \cb3 \expnd0\expndtw0\kerning0
+#!/bin/bash
+\f1\i0 \cf4 \
+\pard\pardeftab720\partightenfactor0
+
+\f2\b \cf5 if
+\f1\b0 \cf4  \cf6 [\cf4  \cf7 "
+\f2\b \cf5 $(
+\f1\b0 \cf4 id -u
+\f2\b \cf5 )
+\f1\b0 \cf7 "\cf4  !\cf6 =\cf4  \cf7 "0"\cf4  \cf6 ]\cf4 ; 
+\f2\b \cf5 then
+\f1\b0 \cf4 \
+	\cf5 echo\cf4  \cf7 "Please login as root, then try again"\cf4  1>&2\
+	\cf5 exit \cf4 1\
+
+\f2\b \cf5 fi
+\f1\b0 \cf4 \
+\pard\pardeftab720\partightenfactor0
+\cf8 eselected\cf6 =
+\f2\b \cf5 $(
+\f1\b0 \cf4 eselect kernel list | awk \cf7 '/\\*/ \{print $2\}'\cf4  | awk \cf7 'gsub("linux-", "")'
+\f2\b \cf5 )
+\f1\b0 \cf4 \
+\cf8 running\cf6 =
+\f2\b \cf5 $(
+\f1\b0 \cf4 uname -r
+\f2\b \cf5 )
+\f1\b0 \cf4 \
+\pard\pardeftab720\partightenfactor0
+
+\f2\b \cf5 if
+\f1\b0 \cf4  \cf6 [\cf4  \cf7 "\cf8 $running\cf7 "\cf4  !\cf6 =\cf4  \cf7 "\cf8 $eselected\cf7 "\cf4  \cf6 ]\cf4 ; 
+\f2\b \cf5 then
+\f1\b0 \cf4 \
+	\cf5 echo\cf4  \cf7 "Please ensure the eselected kernel source and running kernel are the same version, then try again."\cf4  1>&2;\
+	\cf5 exit \cf4 1\
+
+\f2\b \cf5 fi
+\f1\b0 \cf4 \
+\pard\pardeftab720\partightenfactor0
+\cf8 WGET\cf6 =\cf7 "/usr/bin/wget"\cf4 \
+\cf8 $WGET\cf4  -q --tries\cf6 =1\cf4  --timeout\cf6 =1\cf4  http://www.google.com -O /tmp/google.idx &> /dev/null\
+\pard\pardeftab720\partightenfactor0
+
+\f2\b \cf5 if
+\f1\b0 \cf4  \cf6 [\cf4  -s /tmp/google.idx \cf6 ]\cf4 ; 
+\f2\b \cf5 then
+\f1\b0 \cf4 \
+	\cf8 version\cf6 =
+\f2\b \cf9 $\{
+\f1\b0 \cf8 eselected\cf4 :\cf8 0\cf4 :\cf8 1
+\f2\b \cf9 \}
+\f1\b0 \cf4 \
+	\cf8 required_version\cf6 =\cf7 "4"\cf4 \
+	
+\f2\b \cf5 if
+\f1\b0 \cf4  \cf6 [\cf4  \cf7 "\cf8 $version\cf7 "\cf4  \cf6 =\cf4  \cf7 "\cf8 $required_version\cf7 "\cf4  \cf6 ]\cf4 ; 
+\f2\b \cf5 then
+\f1\b0 \cf4 \
+		wget -N https://github.com/csssuf/rtl8812au/archive/master.zip\
+	
+\f2\b \cf5 else
+\f1\b0 \cf4 \
+		wget -N https://github.com/gnab/rtl8812au/archive/master.zip\
+	
+\f2\b \cf5 fi
+\f1\b0 \cf4 \
+	
+\f2\b \cf5 if
+\f1\b0 \cf4  \cf6 [\cf4  -d \cf7 "rtl8812au-master"\cf4  \cf6 ]\cf4 ; 
+\f2\b \cf5 then
+\f1\b0 \cf4 \
+  		rm -rf rtl8812au-master\
+	
+\f2\b \cf5 fi
+\f1\b0 \cf4 \
+
+\f2\b \cf5 fi
+\f1\b0 \cf4 \
+
+\f2\b \cf5 if
+\f1\b0 \cf4  \cf6 [\cf4  -s /root/master.zip \cf6 ]\cf4 ; 
+\f2\b \cf5 then
+\f1\b0 \cf4 \
+	unzip master.zip\
+
+\f2\b \cf5 fi
+\f1\b0 \cf4 \
+
+\f2\b \cf5 if
+\f1\b0 \cf4  \cf6 [\cf4  -d \cf7 "rtl8812au-master"\cf4  \cf6 ]\cf4 ; 
+\f2\b \cf5 then
+\f1\b0 \cf4 \
+	\cf5 cd \cf4 rtl8812au-master\
+	sed \cf7 's/CONFIG_POWER_SAVING = y/CONFIG_POWER_SAVING = n/g'\cf4  Makefile > OUT\
+	mv OUT Makefile\
+	make\
+	insmod 8812au.ko\
+		
+\f2\b \cf5 if
+\f1\b0 \cf4  \cf6 [\cf4  ! -d \cf7 "/lib64/modules/
+\f2\b \cf5 $(
+\f1\b0 \cf4 uname -r
+\f2\b \cf5 )
+\f1\b0 \cf7 /kernel/drivers/net/wireless/rtlwifi/rtl8812au"\cf4  \cf6 ]\cf4 ; 
+\f2\b \cf5 then
+\f1\b0 \cf4 \
+			mkdir /lib64/modules/
+\f2\b \cf5 $(
+\f1\b0 \cf4 uname -r
+\f2\b \cf5 )
+\f1\b0 \cf4 /kernel/drivers/net/wireless/rtlwifi/rtl8812au\
+			\cf5 echo\cf4  \cf7 "rtl8812au directory created."\cf4 ; 1>&2;\
+		
+\f2\b \cf5 else
+\f1\b0 \cf4 \
+			\cf5 echo\cf4  \cf7 "rtl8812au directory existed."\cf4  1>&2;\
+		
+\f2\b \cf5 fi
+\f1\b0 \cf4 \
+	cp -f 8812au.ko /lib64/modules/
+\f2\b \cf5 $(
+\f1\b0 \cf4 uname -r
+\f2\b \cf5 )
+\f1\b0 \cf4 /kernel/drivers/net/wireless/rtlwifi/rtl8812au\
+	depmod -a\
+	\cf5 echo\cf4  \cf7 "Connect the wireless usb device and reboot"\cf4 ;\
+
+\f2\b \cf5 else
+\f1\b0 \cf4 \
+	\cf5 echo\cf4  \cf7 "Unable to find or create /root/rtl8812au-master -> no internet connection, no master.zip file, no rtl8812au-master file."\cf4 ;\
+	\cf5 exit \cf4 1\
+
+\f2\b \cf5 fi}
