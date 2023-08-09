@@ -1,6 +1,6 @@
-#!/bin/bash\
+#!/bin/bash
 
-# The Tor Service Script\
+# The Tor Service Script
 
 # --------------------------------------------------------------------------------
 #       This script performs the following function.
