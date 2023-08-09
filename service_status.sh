@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # --------------------------------------------------------------------------------------------------
-#       This script performs the following functions.\
-#                       1. Switch Alfa WiFi Adapter to Monitor Mode.\
+#       This script performs the following functions.
+#                       1. Switch Alfa WiFi Adapter to Monitor Mode.
 #                       2. Shows the iwconfig setting and sorts for the line showing the current mode.
 # --------------------------------------------------------------------------------------------------
 
