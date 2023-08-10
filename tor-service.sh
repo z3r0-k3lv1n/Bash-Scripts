@@ -26,6 +26,5 @@ if [[ $TorActive != "Active: active" ]]
 	  sleep 10
     elif [[ condition ]]; then
         #statements
-	echo \'93Your Tor service is switched on mate!
+	echo Your Tor service is switched on mate!
 fi
-}
