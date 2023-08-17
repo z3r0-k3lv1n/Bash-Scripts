@@ -12,3 +12,10 @@ The scripts in this folder are a set of tools that make simple work of more comp
 - Starts the TOR service to aid in anonymising traffic.
 - Switch the wireless adapter into monitor mode.
 
+## The Off Script
+
+- Stops the TOR service
+- Shuts down the Wireless adapter
+- Returns the wireless device to manage mode
+- Resets the MAC address to the default address
+- Restarts the wireless interface
